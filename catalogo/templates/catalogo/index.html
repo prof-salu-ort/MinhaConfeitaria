@@ -11,7 +11,9 @@
     <p>Escolha uma das opções abaixo:</p>
     <ul>
         <li><a href="{% url 'catalogo:lista_bolos' %}">Nossos Bolos</a></li>
+        {% if user.is_authenticated %}
         <li><a href="{% url 'catalogo:novo_bolo' %}">Novo Bolo</a></li>
+        {% endif %}
     </ul>
 </body>
 </html>
