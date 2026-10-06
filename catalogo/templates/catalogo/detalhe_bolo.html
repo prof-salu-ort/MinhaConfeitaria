@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ bolo.nome }}</title>
+    <link rel="stylesheet" href="{% static 'catalogo/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ bolo.nome }}</h1>
+
+        <p><strong>Sabor:</strong> {{ bolo.sabor }}</p>
+        <p><strong>Preço:</strong> R$ {{ bolo.preco }}</p>
+
+        <p><strong>Status:</strong>
+            {% if bolo.disponivel %}
+                ✅ Disponível
+            {% else %}
+                ❌ Indisponível
+            {% endif %}
+        </p>
+
+        <p><strong>Descrição:</strong> {{ bolo.descricao|default:"Sem descrição adicional." }}</p>
+
+        <br>
+        <a href="{% url 'catalogo:lista_bolos' %}" class="btn">Voltar para a Vitrine</a>
+    </div>
+</body>
+</html>

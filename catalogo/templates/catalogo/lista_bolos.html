@@ -1,21 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Bolos</title>
+    <link rel="stylesheet" href="{% static 'catalogo/style.css' %}">
 </head>
 <body>
-    <h1>Nossos deliciosos Bolos</h1>
-    <a href="{% url 'catalogo:home' %}">Voltar</a>
+    <div class="container">
+        <h1>Nossos deliciosos Bolos</h1>
 
-    {% if bolos%}
-        <ul>
-            {% for bolo in bolos %}
-                <li>{{bolo.nome}} - R$ {{bolo.preco}}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Nenhum bolo cadastrado.</p>
-    {% endif %}
+        <a href="{% url 'catalogo:home' %}" class="btn">Voltar para a Home</a>
+        <a href="{% url 'catalogo:novo_bolo' %}" class="btn">Adicionar Novo Bolo</a>
+        <br><br>
+
+        {% if bolos %}
+            <ul>
+                {% for bolo in bolos %}
+                    <li>
+                        <a href="{% url 'catalogo:detalhe_bolo' bolo.pk %}"><strong>{{bolo.nome}} [R${{bolo.preco}}]</strong></a>
+
+                        <div class="actions">
+                            <a href="{% url 'catalogo:editar_bolo' bolo.pk %}" class="btn">Editar</a>
+                            <a href="{% url 'catalogo:apagar_bolo' bolo.pk %}" class="btn-danger">Apagar</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum bolo cadastrado.</p>
+        {% endif %}
+    </div>
 </body>
 </html>
