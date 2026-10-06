@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="{% static 'catalogo/style.css' %}">
 </head>
 <body>
-    <h1>Adicionar Novo Bolo</h1>
+    <h1>{% if form.instance.pk %}Editar Bolo{% else %}Adicionar Novo Bolo{% endif %}</h1>
 
-    <form method="POST" >
+    <!-- Adicionado o enctype obrigatório! -->
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {{form.as_p}}
+        {{ form.as_p }}
 
-        <button type="submit">Salvar</button>
-        <a href="{% url 'catalogo:home' %}">Cancelar</a>
+        <button type="submit" class="btn">Salvar</button>
+        <a href="{% url 'catalogo:lista_bolos' %}" class="btn">Cancelar</a>
     </form>
 </body>
 </html>

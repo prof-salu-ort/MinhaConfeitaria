@@ -17,7 +17,7 @@ def lista_bolos(request):
 
 def novo_bolo(request):
     if request.method == 'POST':
-        form = BoloForm(request.POST)
+        form = BoloForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
@@ -41,7 +41,7 @@ def editar_bolo(request, pk):
     bolo = get_object_or_404(Bolo, pk=pk)
 
     if request.method == 'POST':
-        form = BoloForm(request.POST, instance=bolo)
+        form = BoloForm(request.POST, request.FILES, instance=bolo)
         if form.is_valid():
             form.save()
             return redirect('catalogo:detalhe_bolo', pk=bolo.pk)
